@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from db_utils import connect_db, create_table, insert_track,truncate_table
 from spotify_utils import extract_track_data
 from data_operations import get_min_max_avg, detect_duplicates, detect_outliers
-import seaborn as sns
 import numpy as np
 
 st.title("🎵 Spotify Track Analyzer")
@@ -34,7 +33,7 @@ if submit:
             conn= connect_db()
             st.subheader("🎧 Track Data (Current Session)")
             st.dataframe(df_input)
-            sns.set(style="whitegrid")
+           
 
             st.subheader("🎨 Track Duration vs Popularity")
 
