@@ -1,5 +1,5 @@
 mysql.connector
 pandas
-matplotlib.pyplot 
+matplotlib
 spotipy
 streamlit
