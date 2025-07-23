@@ -1,6 +1,7 @@
 import mysql.connector
 import pandas as pd
 
+
 def connect_db():
     return mysql.connector.connect(
         host='localhost',
