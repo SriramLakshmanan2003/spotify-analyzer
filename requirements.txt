@@ -1,0 +1,5 @@
+mysql.connector
+pandas
+matplotlib.pyplot 
+spotipy
+streamlit
