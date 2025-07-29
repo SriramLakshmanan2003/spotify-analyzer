@@ -26,8 +26,15 @@ if submit:
                 data = extract_track_data(url)
                 insert_track(conn, data)
                 df_input = pd.concat([df_input, pd.DataFrame([data])], ignore_index=True)
+                
+
             except Exception as e:
                 st.error(f"Error processing {url}: {e}")
+        dupes = detect_duplicates(df_input)
+        if not dupes.empty:
+                st.subheader("🚨 Duplicate Songs Detected")
+                st.dataframe(dupes)
+        df_input = df_input.drop_duplicates(subset=['track_name', 'artist_name', 'duration_min'], keep='first')
 
         if not df_input.empty:
             conn= connect_db()
@@ -62,11 +69,9 @@ if submit:
             st.metric("Minimum Duration (min)", f"{stats['min_duration']:.2f}")
             st.metric("Maximum Duration (min)", f"{stats['max_duration']:.2f}")
             st.metric("Average Duration (min)", f"{stats['avg_duration']:.2f}")
+            st.success("Tracks analyzed and data stored in the database.")
 
-            dupes = detect_duplicates(df_input)
-            if not dupes.empty:
-                st.subheader("🚨 Duplicate Songs Detected")
-                st.dataframe(dupes)
+            
 
             outliers = detect_outliers(df_input)
             if not outliers.empty:

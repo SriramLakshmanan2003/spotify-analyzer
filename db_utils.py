@@ -1,13 +1,15 @@
 import mysql.connector
 import pandas as pd
+import streamlit as st
 
 
 def connect_db():
     return mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='muruga',
-        database='spotify_project'
+        host=st.secrets["DB_HOST"],
+        user=st.secrets["DB_USER"],
+        password=st.secrets["DB_PASSWORD"],
+        database=st.secrets["DB_PORT"]
+
     )
 
 def create_table(conn):
@@ -39,7 +41,7 @@ def insert_track(conn, track):
     conn.commit()
 
 def fetch_all_tracks(conn):
-    return pd.read_sql("SELECT * FROM tracks", conn)
+    return pd.read_sql("SELECT DISTINCT * FROM tracks", conn)
 
 def truncate_table(conn):
     cursor=conn.cursor()
