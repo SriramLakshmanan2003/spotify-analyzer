@@ -1,7 +1,7 @@
 import spotipy 
-import re
+import streamlit as st
 
-sp=spotipy.Spotify(auth_manager=spotipy.SpotifyClientCredentials(client_id='92dd80c97bef40dcb35f7ef6f3c3c33c', client_secret='c34299e9167e4bca960391005c3bb6c0'))
+sp=spotipy.Spotify(auth_manager=spotipy.SpotifyClientCredentials(client_id=st.secrets["SPOTIFY_CLIENT_ID"], client_secret=st.secrets["SPOTIFY_CLIENT_SECRET"]))
 
 
 def extract_track_data(url):
